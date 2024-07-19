@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/cliente_login.css">
+</head>
+<body>
+<center>
+    <div id="container">
+        <form class="form" id="registroForm" onsubmit="ValidarUsuario(event)">
+            <p class="title">Login </p>
+            <p class="message">Ingresa tus datos para entrar a nuestra tienda online </p>
+                
+            <label>
+                <input required placeholder="" type="email" class="input" id="correo">
+                <span>Correo</span>
+            </label> 
+                
+            <label>
+                <input required placeholder="" type="password" class="input" id="contrasena">
+                <span>Contraseña</span>
+            </label>
+            <button class="submit" type="submit">Login</button>
+            <p class="signin">No tienes una cuenta? <a href="./cliente_register.html">Register</a> </p>
+        </form>
+    </div>
+</center>
+
+<script>
+    async function ValidarUsuario(event) {
+        event.preventDefault();
+
+        const correo = document.getElementById('correo').value;
+        const contrasena = document.getElementById('contrasena').value;
+
+        try {
+            const response = await fetch('./json/usuarios.json');
+            const data = await response.json();
+
+            const usuario = data.usuarios.find(user => user.correo === correo && user.contrasena === contrasena);
+
+            if (usuario) {
+                alert('Login exitoso');
+                window.location.href = './tienda.html'; // Redirigir a la página de la tienda
+            } else {
+                alert('Correo o contraseña incorrectos');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Ocurrió un error al validar el usuario');
+        }
+    }
+</script>
+
+</body>
+</html>

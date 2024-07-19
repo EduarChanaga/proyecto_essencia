@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+   background-color: white;
+}
+
+.container {
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    animation: aparecer-logo 1s forwards, desaparecer-logo 1s forwards 2s, aparecer-opciones 1s forwards 3s;
+}
+
+.logo {
+    margin-top: -20%;
+    margin-left: 35%;
+    position: absolute;
+    opacity: 1;
+    animation: aparecer-logo 1s forwards, desaparecer-logo 1s forwards 2s;
+}
+
+.opciones {
+    opacity: 0;
+    animation: aparecer-opciones 1s forwards 3s;
+}
+
+.logo img {
+ 
+    width: 18vi; /* Ajusta el tamaño de acuerdo a tu logo */
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.opciones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    border-radius: 1vi;
+    width: 15vi;
+    height: 20vi;
+    padding: 1vi 2vi;
+    margin: 5vi;
+    font-size: 2vi;
+    background-color: #f7b77c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e9a15e;
+}
+
+@keyframes aparecer-logo {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes desaparecer-logo {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes aparecer-opciones {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

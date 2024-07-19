@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/cliente_login.css">
+</head>
+<body>
+<center>
+    <div id="container">
+        <form class="form" id="registroForm" onsubmit="registrarUsuario(event)">
+            <p class="title">Register </p>
+            <p class="message">Registrate para ingresar a nuestra tienda online </p>
+            <div class="flex">
+                <label>
+                    <input required placeholder="" type="text" class="input" id="nombre">
+                    <span>Nombre</span>
+                </label>
+        
+                <label>
+                    <input required placeholder="" type="text" class="input" id="apellido">
+                    <span>Apellido</span>
+                </label>
+            </div>  
+                
+            <label>
+                <input required placeholder="" type="email" class="input" id="correo">
+                <span>Correo</span>
+            </label> 
+                
+            <label>
+                <input required placeholder="" type="password" class="input" id="contrasena">
+                <span>Contraseña</span>
+            </label>
+            <label>
+                <input required placeholder="" type="password" class="input" id="confirmarContrasena">
+                <span>Confirmar contraseña</span>
+            </label>
+            <button class="submit" type="submit">Registrarse</button>
+            <p class="signin">Ya tienes una cuenta? <a href="./cliente_login.html">Login</a> </p>
+        </form>
+    </div>
+</center>
+
+<script>
+    function registrarUsuario(event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const correo = document.getElementById('correo').value;
+        const contrasena = document.getElementById('contrasena').value;
+        const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+
+        if (nombre === "" || apellido === "" || correo === "" || contrasena === "" || confirmarContrasena === "") {
+            alert('Por favor, complete todos los campos');
+            return;
+        }
+
+        if (contrasena !== confirmarContrasena) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+
+        const nuevoUsuario = {
+            nombre: nombre,
+            apellido: apellido,
+            correo: correo,
+            contrasena: contrasena
+        };
+
+        fetch('./json/usuarios.json')
+            .then(response => response.json())
+            .catch(() => ({ usuarios: [] })) // Si no se encuentra el archivo, se crea una estructura vacía
+            .then(data => {
+                data.usuarios.push(nuevoUsuario);
+
+                // Crear un blob con el contenido actualizado del archivo JSON
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+
+                // Crear un enlace temporal para forzar la descarga del archivo
+                const enlace = document.createElement('a');
+                enlace.href = URL.createObjectURL(blob);
+                enlace.download = 'usuarios.json';
+                document.body.appendChild(enlace);
+                enlace.click();
+                document.body.removeChild(enlace);
+
+                // Redirigir a la página de login después del registro
+                window.location.href = './cliente_login.html';
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>
