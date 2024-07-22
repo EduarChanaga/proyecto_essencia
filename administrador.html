@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador Essencia</title>
+    <link rel="stylesheet" href="./css/administrador.css">
+</head>
+<body>
+    <h1>Agregar Producto</h1>
+    <form id="productForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" required></textarea>
+        
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required>
+        
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" name="categoria" required>
+            <option value="camisetas">Camisetas</option>
+            <option value="pantalones">Pantalones</option>
+            <option value="chaquetas">Chaquetas</option>
+            <option value="zapatos">Zapatos</option>
+            <option value="accesorios">Accesorios</option>
+            <option value="camisas">Camisas</option>
+            <option value="blusas">Blusas</option>
+            <option value="faldas">Faldas</option>
+            <option value="chaquetas_de_denim">Chaquetas de Denim</option>
+            <option value="abrigo">Abrigo</option>
+            <option value="chalecos">Chalecos</option>
+            <option value="trajes">Trajes</option>
+            <option value="pantalones_cortos">Pantalones Cortos</option>
+            <option value="leggings">Leggings</option>
+            <option value="bufandas">Bufandas</option>
+            <option value="guantes">Guantes</option>
+            <option value="sombreros">Sombreros</option>
+            <option value="gorros">Gorros</option>
+            <option value="cinturones">Cinturones</option>
+            <option value="calcetines">Calcetines</option>
+            <option value="ropa_de_deporte">Ropa de Deporte</option>
+            <option value="batas">Batas</option>
+            <option value="ropas_de_cama">Ropas de Cama</option>
+        </select>
+        
+        <label for="nombreImagen">Nombre de la Imagen (sin extensión):</label>
+        <input type="text" id="nombreImagen" name="nombreImagen" required>
+        
+        <label for="cantidad">Cantidad Disponible:</label>
+        <input type="number" id="cantidad" name="cantidad" required>
+        
+        <button type="submit">Agregar Producto</button>
+    </form>
+
+    <div id="cambioResumen"></div>
+    <button id="downloadBtn" style="display:none;">Descargar Productos</button>
+
+    <h2>Productos</h2>
+    <div id="productosContainer"></div>
+
+    <script>
+        const productos = []; // Array para almacenar los productos en memoria
+        let cambios = { agregados: 0, eliminados: 0 };
+
+        function cargarProductos() {
+            fetch('./json/productos.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudo cargar el archivo JSON');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        data.forEach(producto => {
+                            productos.push(producto);
+                        });
+                        mostrarProductos();
+                    } else {
+                        console.error('Formato de JSON incorrecto');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar productos:', error);
+                });
+        }
+
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const nombreImagen = formData.get('nombreImagen');
+            const imagenPathPng = `./productos_img/${nombreImagen}.png`;
+            const imagenPathJpg = `./productos_img/${nombreImagen}.jpg`;
+            const imagenPathJpeg = `./productos_img/${nombreImagen}.jpeg`;
+
+            fetch(imagenPathPng)
+                .then(response => {
+                    if (response.ok) {
+                        agregarProducto(formData, 'png');
+                    } else {
+                        return fetch(imagenPathJpg);
+                    }
+                })
+                .then(response => {
+                    if (response && response.ok) {
+                        agregarProducto(formData, 'jpg');
+                    } else {
+                        return fetch(imagenPathJpeg);
+                    }
+                })
+                .then(response => {
+                    if (response && response.ok) {
+                        agregarProducto(formData, 'jpeg');
+                    } else {
+                        alert('La imagen no se encuentra en la carpeta ./productos_img');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al verificar la imagen:', error);
+                    alert('Error al verificar la imagen. Inténtelo de nuevo.');
+                });
+        });
+
+        function agregarProducto(formData, extensionImagen) {
+            const product = {
+                nombre: formData.get('nombre'),
+                descripcion: formData.get('descripcion'),
+                precio: formData.get('precio'),
+                categoria: formData.get('categoria'),
+                imagen: `${formData.get('nombreImagen')}.${extensionImagen}`,
+                cantidad: formData.get('cantidad')
+            };
+
+            const productoExistente = productos.find(p => p.nombre === product.nombre);
+            if (!productoExistente) {
+                productos.push(product);
+                cambios.agregados++;
+                alert('Producto agregado exitosamente');
+                mostrarProductos();
+                document.getElementById('productForm').reset();
+                document.getElementById('downloadBtn').style.display = 'block';
+                actualizarResumen();
+            } else {
+                alert('El producto ya existe.');
+            }
+        }
+
+        function eliminarProducto(index) {
+            productos.splice(index, 1);
+            cambios.eliminados++;
+            mostrarProductos();
+            document.getElementById('downloadBtn').style.display = 'block';
+            actualizarResumen();
+        }
+
+        function actualizarResumen() {
+            const resumen = document.getElementById('cambioResumen');
+            resumen.textContent = `Cambios realizados: ${cambios.agregados} producto(s) agregado(s), ${cambios.eliminados} producto(s) eliminado(s).`;
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Actualizar el resumen de cambios antes de descargar
+            const blob = new Blob([JSON.stringify(productos, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'productos.json'; // Nombre del archivo descargado
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            // Resetear los cambios después de descargar
+            cambios = { agregados: 0, eliminados: 0 };
+            actualizarResumen();
+        });
+
+        function mostrarProductos() {
+            const productosContainer = document.getElementById('productosContainer');
+            productosContainer.innerHTML = '';
+
+            productos.forEach((producto, index) => {
+                const productoDiv = document.createElement('div');
+                productoDiv.className = 'producto';
+                productoDiv.innerHTML = `
+                    <img src="./productos_img/${producto.imagen}" alt="${producto.nombre}">
+                    <h2>${producto.nombre}</h2>
+                    <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+                    <p><strong>Precio:</strong> ${producto.precio} USD</p>
+                    <p><strong>Categoría:</strong> ${producto.categoria}</p>
+                    <p><strong>Cantidad Disponible:</strong> ${producto.cantidad}</p>
+                    <button class="eliminar-btn" data-index="${index}">Eliminar</button>
+                `;
+
+                productosContainer.appendChild(productoDiv);
+            });
+
+            document.querySelectorAll('.eliminar-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    eliminarProducto(index);
+                });
+            });
+        }
+
+        cargarProductos();
+    </script>
+</body>
+</html>

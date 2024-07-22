@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Essencia</title>
+    <link rel="stylesheet" href="./css/tienda.css">
 </head>
 <body>
-    <p>hola</p>
+    <header>
+        <div class="logo">Essencia</div>
+        <nav>
+            <a href="#inicio" onclick="showSection('inicio')">Inicio</a>
+            <a href="#productos" onclick="showSection('productos')">Productos</a>
+            <a href="#ofertas" onclick="showSection('ofertas')">Ofertas</a>
+            <a href="#contacto" onclick="showSection('contacto')">Contacto</a>
+        </nav>
+    </header>
+    <section id="inicio" class="active">
+        <p>Inicio</p>
+    </section>
+    <section id="productos">
+        <p>Productos</p>
+    </section>
+    <section id="ofertas">
+        <p>Ofertas</p>
+    </section>
+    <section id="contacto">
+        <p>Contacto</p>
+    </section>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
