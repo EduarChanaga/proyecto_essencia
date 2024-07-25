@@ -7,57 +7,64 @@
     <link rel="stylesheet" href="./css/administrador.css">
 </head>
 <body>
-    <h1>Agregar Producto</h1>
-    <form id="productForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" required></textarea>
-        
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" required>
-        
-        <label for="categoria">Categoría:</label>
-        <select id="categoria" name="categoria" required>
-            <option value="camisetas">Camisetas</option>
-            <option value="pantalones">Pantalones</option>
-            <option value="chaquetas">Chaquetas</option>
-            <option value="zapatos">Zapatos</option>
-            <option value="accesorios">Accesorios</option>
-            <option value="camisas">Camisas</option>
-            <option value="blusas">Blusas</option>
-            <option value="faldas">Faldas</option>
-            <option value="chaquetas_de_denim">Chaquetas de Denim</option>
-            <option value="abrigo">Abrigo</option>
-            <option value="chalecos">Chalecos</option>
-            <option value="trajes">Trajes</option>
-            <option value="pantalones_cortos">Pantalones Cortos</option>
-            <option value="leggings">Leggings</option>
-            <option value="bufandas">Bufandas</option>
-            <option value="guantes">Guantes</option>
-            <option value="sombreros">Sombreros</option>
-            <option value="gorros">Gorros</option>
-            <option value="cinturones">Cinturones</option>
-            <option value="calcetines">Calcetines</option>
-            <option value="ropa_de_deporte">Ropa de Deporte</option>
-            <option value="batas">Batas</option>
-            <option value="ropas_de_cama">Ropas de Cama</option>
-        </select>
-        
-        <label for="nombreImagen">Nombre de la Imagen (sin extensión):</label>
-        <input type="text" id="nombreImagen" name="nombreImagen" required>
-        
-        <label for="cantidad">Cantidad Disponible:</label>
-        <input type="number" id="cantidad" name="cantidad" required>
-        
-        <button type="submit">Agregar Producto</button>
-    </form>
+    <button id="agregarNuevoProductoBtn">Agregar Nuevo Producto</button>
+    
+    <!-- Ventana emergente -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>Agregar Producto</h2>
+        <form id="productForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+            
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required>
+            
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" name="categoria" required>
+                <option value="camisetas">Camisetas</option>
+                <option value="pantalones">Pantalones</option>
+                <option value="chaquetas">Chaquetas</option>
+                <option value="zapatos">Zapatos</option>
+                <option value="accesorios">Accesorios</option>
+                <option value="camisas">Camisas</option>
+                <option value="blusas">Blusas</option>
+                <option value="faldas">Faldas</option>
+                <option value="chaquetas_de_denim">Chaquetas de Denim</option>
+                <option value="abrigo">Abrigo</</option>
+                <option value="chalecos">Chalecos</option>
+                <option value="trajes">Trajes</option>
+                <option value="pantalones_cortos">Pantalones Cortos</option>
+                <option value="leggings">Leggings</option>
+                <option value="bufandas">Bufandas</option>
+                <option value="guantes">Guantes</option>
+                <option value="sombreros">Sombreros</option>
+                <option value="gorros">Gorros</option>
+                <option value="cinturones">Cinturones</option>
+                <option value="calcetines">Calcetines</option>
+                <option value="ropa_de_deporte">Ropa de Deporte</option>
+                <option value="batas">Batas</option>
+                <option value="ropas_de_cama">Ropas de Cama</option>
+            </select>
+            
+            <label for="nombreImagen">Nombre de la Imagen (sin extensión):</label>
+            <input type="text" id="nombreImagen" name="nombreImagen" required>
+            
+            <label for="cantidad">Cantidad Disponible:</label>
+            <input type="number" id="cantidad" name="cantidad" required>
+            
+            <button type="submit">Agregar Producto</button>
+            <button type="button" id="cerrarPopupBtn">Cerrar</button>
+        </form>
+    </div>
 
     <div id="cambioResumen"></div>
     <button id="downloadBtn" style="display:none;">Descargar Productos</button>
 
-    <h2>Productos</h2>
+    <center><h1>Productos</h1></center>
     <div id="productosContainer"></div>
 
     <script>
@@ -143,6 +150,7 @@
                 document.getElementById('productForm').reset();
                 document.getElementById('downloadBtn').style.display = 'block';
                 actualizarResumen();
+                cerrarPopup(); // Cierra la ventana emergente al agregar el producto
             } else {
                 alert('El producto ya existe.');
             }
@@ -162,7 +170,6 @@
         }
 
         document.getElementById('downloadBtn').addEventListener('click', function() {
-            // Actualizar el resumen de cambios antes de descargar
             const blob = new Blob([JSON.stringify(productos, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -172,7 +179,6 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            // Resetear los cambios después de descargar
             cambios = { agregados: 0, eliminados: 0 };
             actualizarResumen();
         });
@@ -188,21 +194,31 @@
                     <img src="./productos_img/${producto.imagen}" alt="${producto.nombre}">
                     <h2>${producto.nombre}</h2>
                     <p><strong>Descripción:</strong> ${producto.descripcion}</p>
-                    <p><strong>Precio:</strong> ${producto.precio} USD</p>
+                    <p><strong>Precio:</strong> ${producto.precio} $</p>
                     <p><strong>Categoría:</strong> ${producto.categoria}</p>
                     <p><strong>Cantidad Disponible:</strong> ${producto.cantidad}</p>
-                    <button class="eliminar-btn" data-index="${index}">Eliminar</button>
+                    <button class="eliminar-btn" onclick="eliminarProducto(${index})">Eliminar</button>
                 `;
-
                 productosContainer.appendChild(productoDiv);
             });
+        }
 
-            document.querySelectorAll('.eliminar-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = this.getAttribute('data-index');
-                    eliminarProducto(index);
-                });
-            });
+        const agregarNuevoProductoBtn = document.getElementById('agregarNuevoProductoBtn');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+        const cerrarPopupBtn = document.getElementById('cerrarPopupBtn');
+
+        agregarNuevoProductoBtn.addEventListener('click', function() {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        cerrarPopupBtn.addEventListener('click', cerrarPopup);
+        overlay.addEventListener('click', cerrarPopup);
+
+        function cerrarPopup() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
         }
 
         cargarProductos();

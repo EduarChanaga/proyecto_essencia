@@ -16,14 +16,20 @@
             <button onclick="redirigir_administrador()">Administrador</button>
         </div>
     </div>
+    <audio id="inicio-sound" src="./efectos sonido/stars.mp3"></audio>
 </body>
 <script>
-      function redirigir_cliente() {
+    function redirigir_cliente() {
         window.location.href = "./cliente_register.html"; 
-        }
-      function redirigir_administrador() {
-        window.location.href = "./administrador.html"; 
-        }
-</script>
+    }
 
+    function redirigir_administrador() {
+        window.location.href = "./administrador.html"; 
+    }
+
+    window.onload = function() {
+        var audio = document.getElementById("inicio-sound");
+        audio.play();
+    }
+</script>
 </html>

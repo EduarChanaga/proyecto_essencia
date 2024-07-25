@@ -31,11 +31,15 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    background-color: rgb(255, 238, 208);
+    padding: 1vi;
+    border: 0.5vi solid #ff932e;
+    border-radius: 1vi;
 }
 .producto {
     background-color: #f7b77c;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #9b6a00;
+    border-radius: 1vi;
     padding: 10px;
     width: calc(20% - 20px);
     height: auto;
@@ -46,6 +50,7 @@ button:hover {
     height: 40%;
     border-radius: 5px;
 }
+
 .producto h2 {
     font-size: 1.2em;
     margin: 0 0 10px;
@@ -63,4 +68,28 @@ button:hover {
 
 .eliminar-btn:hover {
     background-color: #e63a3a;
+}
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    padding: 20px;
+    z-index: 1000;
+    width: 300px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
 }

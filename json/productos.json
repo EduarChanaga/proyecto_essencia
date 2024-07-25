@@ -1,1 +1,58 @@
-[]
+[
+    {
+      "nombre": "as",
+      "descripcion": "ad",
+      "precio": "1000000",
+      "categoria": "camisetas",
+      "imagen": "ropa.jpg",
+      "cantidad": "20"
+    },
+    {
+        "nombre": "camiseta",
+        "descripcion": "as",
+        "precio": "1000000",
+        "categoria": "camisetas",
+        "imagen": "ropas.jpeg",
+        "cantidad": "20"
+      },
+      {
+          "nombre": "camiseta",
+          "descripcion": "as",
+          "precio": "1000000",
+          "categoria": "camisetas",
+          "imagen": "ropa.jpg",
+          "cantidad": "20"
+        },
+        {
+            "nombre": "camiseta",
+            "descripcion": "as",
+            "precio": "1000000",
+            "categoria": "camisetas",
+            "imagen": "ropa.jpg",
+            "cantidad": "20"
+          },
+          {
+              "nombre": "camiseta",
+              "descripcion": "as",
+              "precio": "1000000",
+              "categoria": "camisetas",
+              "imagen": "ropas.jpeg",
+              "cantidad": "20"
+            },
+            {
+                "nombre": "camiseta",
+                "descripcion": "as",
+                "precio": "1000000",
+                "categoria": "camisetas",
+                "imagen": "ropa.jpg",
+                "cantidad": "20"
+              },
+              {
+                  "nombre": "camiseta",
+                  "descripcion": "as",
+                  "precio": "1000000",
+                  "categoria": "camisetas",
+                  "imagen": "ropa.jpg",
+                  "cantidad": "20"
+                }
+  ]
