@@ -15,6 +15,7 @@
             <a href="#ofertas" onclick="showSection('ofertas')">Ofertas</a>
             <a href="#contacto" onclick="showSection('contacto')">Contacto</a>
         </nav>
+        <button class="btn-cerrar-sesion" onclick="toggleModal()">⚙</button>
     </header>
     <section id="inicio" class="active">
         <p>Inicio</p>
@@ -29,13 +30,39 @@
         <p>Contacto</p>
     </section>
 
+    <!-- Ventana emergente para cerrar sesión -->
+    <div id="modalCerrarSesion" class="modal">
+        <div class="modal-content">
+            <p>¿Estás seguro de que quieres cerrar sesión?</p>
+            <button class="confirmar" onclick="cerrarSesion()">Cerrar sesión</button>
+            <button class="cancelar" onclick="toggleModal()">Cancelar</button>
+        </div>
+    </div>
+
     <script>
+        // Verificar si el usuario está autenticado
+        if (localStorage.getItem('autenticado') !== 'true') {
+            alert('Debes iniciar sesión para acceder a esta página.');
+            window.location.href = './cliente_login.html'; // Redirigir a la página de login
+        }
+
         function showSection(sectionId) {
             const sections = document.querySelectorAll('section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
+        }
+
+        function toggleModal() {
+            const modal = document.getElementById('modalCerrarSesion');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem('autenticado');
+            alert('Has cerrado sesión');
+            window.location.href = './cliente_login.html'; // Redirigir a la página de login
         }
     </script>
 </body>

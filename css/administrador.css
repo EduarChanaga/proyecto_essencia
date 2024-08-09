@@ -1,88 +1,124 @@
+/* Estilos Generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 20px;
+    background-color: #f4f4f9; /* Color de fondo suave */
+    color: #333; /* Color de texto */
 }
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-}
-label {
-    margin: 10px 0 5px;
-}
-input, select, textarea {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+
+/* Botones */
 button {
-    padding: 10px;
-    background-color: #f7b77c;
+    padding: 10px 15px;
+    background-color: #f7b77c; /* Color de fondo */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
+
 button:hover {
-    background-color: #ff932e;
+    background-color: #ff932e; /* Color de fondo en hover */
 }
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff; /* Fondo blanco para el formulario */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Contenedor de Productos */
 #productosContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    background-color: rgb(255, 238, 208);
-    padding: 1vi;
-    border: 0.5vi solid #ff932e;
-    border-radius: 1vi;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .producto {
-    background-color: #f7b77c;
-    border: 1px solid #9b6a00;
-    border-radius: 1vi;
-    padding: 10px;
-    width: calc(20% - 20px);
-    height: auto;
+    background-color: #fff; /* Fondo blanco para productos */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: calc(25% - 20px);
     box-sizing: border-box;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
 }
+
+.producto:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
 .producto img {
     max-width: 100%;
-    height: 40%;
+    height: auto;
     border-radius: 5px;
 }
 
 .producto h2 {
-    font-size: 1.2em;
-    margin: 0 0 10px;
+    font-size: 1.1em;
+    margin: 10px 0;
 }
 
+/* Botón Eliminar */
 .eliminar-btn {
-    background-color: #ff4c4c;
-    color: white;
+    background-color: #ff4c4c; /* Color de fondo para eliminar */
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    padding: 5px 10px;
-    margin-top: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
 .eliminar-btn:hover {
-    background-color: #e63a3a;
+    background-color: #e63a3a; /* Color de fondo en hover */
 }
 
-
+/* Ventana Emergente */
 .popup {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background-color: #fff; /* Fondo blanco para popup */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     padding: 20px;
     z-index: 1000;
-    width: 300px;
+    width: 400px;
+    border-radius: 10px;
 }
+
 .overlay {
     display: none;
     position: fixed;
@@ -90,6 +126,14 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 999;
+}
+
+/* Resumen de Cambios */
+#cambioResumen {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
 }

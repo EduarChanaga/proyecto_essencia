@@ -42,6 +42,8 @@
             const usuario = data.usuarios.find(user => user.correo === correo && user.contrasena === contrasena);
 
             if (usuario) {
+                // Guardar el estado de autenticación en el almacenamiento local
+                localStorage.setItem('autenticado', 'true');
                 alert('Login exitoso');
                 window.location.href = './tienda.html'; // Redirigir a la página de la tienda
             } else {

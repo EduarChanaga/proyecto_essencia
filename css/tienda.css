@@ -32,3 +32,64 @@ section {
 section.active {
     display: block;
 }
+
+/* Estilo para el botón redondo */
+.btn-cerrar-sesion {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: #f7b77c;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px #f7b77c;
+}
+.btn-cerrar-sesion:hover {
+    background-color: hsl(29, 100%, 64%);
+}
+
+/* Estilo para la ventana emergente */
+.modal {
+    display: none; /* Ocultar la ventana emergente por defecto */
+    position: fixed;
+    top: 10px; /* Posición desde la parte superior */
+    right: 10px; /* Posición desde la parte derecha */
+    width: 250px;
+    background-color: rgba(141, 141, 141, 0.8);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000; /* Asegurar que esté encima de otros elementos */
+}
+.modal-content {
+    padding: 20px;
+    text-align: center;
+}
+.modal-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.modal-content button.cancelar {
+    background-color: #333;
+    color: white;
+}
+.modal-content button.cancelar:hover {
+    background-color: #555;
+}
+.modal-content button.confirmar {
+    background-color: #979797;
+    color: white;
+}
+.modal-content button.confirmar:hover {
+    background-color: rgb(102, 102, 102);
+}

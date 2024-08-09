@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/administrador.css">
 </head>
 <body>
-    <button id="agregarNuevoProductoBtn">Agregar Nuevo Producto</button>
+    <center><button id="agregarNuevoProductoBtn">Agregar Nuevo Producto</button></center>
     
     <!-- Ventana emergente -->
     <div class="overlay" id="overlay"></div>
@@ -34,7 +34,7 @@
                 <option value="blusas">Blusas</option>
                 <option value="faldas">Faldas</option>
                 <option value="chaquetas_de_denim">Chaquetas de Denim</option>
-                <option value="abrigo">Abrigo</</option>
+                <option value="abrigo">Abrigo</option>
                 <option value="chalecos">Chalecos</option>
                 <option value="trajes">Trajes</option>
                 <option value="pantalones_cortos">Pantalones Cortos</option>
@@ -62,9 +62,41 @@
     </div>
 
     <div id="cambioResumen"></div>
-    <button id="downloadBtn" style="display:none;">Descargar Productos</button>
+    <center><button id="downloadBtn" style="display:none;">Descargar Productos</button></center>
+
+   
 
     <center><h1>Productos</h1></center>
+     <!-- Filtro por Categoría -->
+     <center>
+        <label for="filterCategory">Filtrar por Categoría:</label>
+        <select id="filterCategory">
+            <option value="all">Todos</option>
+            <option value="camisetas">Camisetas</option>
+            <option value="pantalones">Pantalones</option>
+            <option value="chaquetas">Chaquetas</option>
+            <option value="zapatos">Zapatos</option>
+            <option value="accesorios">Accesorios</option>
+            <option value="camisas">Camisas</option>
+            <option value="blusas">Blusas</option>
+            <option value="faldas">Faldas</option>
+            <option value="chaquetas_de_denim">Chaquetas de Denim</option>
+            <option value="abrigo">Abrigo</option>
+            <option value="chalecos">Chalecos</option>
+            <option value="trajes">Trajes</option>
+            <option value="pantalones_cortos">Pantalones Cortos</option>
+            <option value="leggings">Leggings</option>
+            <option value="bufandas">Bufandas</option>
+            <option value="guantes">Guantes</option>
+            <option value="sombreros">Sombreros</option>
+            <option value="gorros">Gorros</option>
+            <option value="cinturones">Cinturones</option>
+            <option value="calcetines">Calcetines</option>
+            <option value="ropa_de_deporte">Ropa de Deporte</option>
+            <option value="batas">Batas</option>
+            <option value="ropas_de_cama">Ropas de Cama</option>
+        </select>
+    </center>
     <div id="productosContainer"></div>
 
     <script>
@@ -183,11 +215,13 @@
             actualizarResumen();
         });
 
-        function mostrarProductos() {
+        function mostrarProductos(categoriaFiltro = 'all') {
             const productosContainer = document.getElementById('productosContainer');
             productosContainer.innerHTML = '';
 
-            productos.forEach((producto, index) => {
+            const productosFiltrados = categoriaFiltro === 'all' ? productos : productos.filter(p => p.categoria === categoriaFiltro);
+
+            productosFiltrados.forEach((producto, index) => {
                 const productoDiv = document.createElement('div');
                 productoDiv.className = 'producto';
                 productoDiv.innerHTML = `
@@ -202,6 +236,12 @@
                 productosContainer.appendChild(productoDiv);
             });
         }
+
+        // Manejar cambio en el filtro de categoría
+        document.getElementById('filterCategory').addEventListener('change', function() {
+            const categoriaSeleccionada = this.value;
+            mostrarProductos(categoriaSeleccionada);
+        });
 
         const agregarNuevoProductoBtn = document.getElementById('agregarNuevoProductoBtn');
         const popup = document.getElementById('popup');
