@@ -5,6 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Essencia</title>
     <link rel="stylesheet" href="./css/tienda.css">
+    <style>
+        /* Estilos básicos para los productos y el carrito */
+        #productosContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .producto {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 300px;
+            height: 400px; /* Ajusta la altura según el diseño */
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+            box-sizing: border-box; /* Incluye el padding en el tamaño total */
+            position: relative; /* Para usar el pseudo-elemento ::after */
+            overflow: hidden; /* Oculta cualquier contenido que se desborde */
+        }
+        .producto img {
+            max-width: 100%;
+            height: 150px; /* Ajusta la altura de la imagen según sea necesario */
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.3s ease; /* Transición suave para el zoom */
+        }
+        .producto:hover img {
+            transform: scale(1.2); /* Aumenta el tamaño de la imagen en 20% */
+        }
+        .producto h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .producto p {
+            margin: 5px 0;
+            flex: 1; /* Permite que el contenido ocupe el espacio restante */
+        }
+        .producto button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .producto button:hover {
+            background-color: #e65c50;
+        }
+        #carritoContainer {
+            border: 1px solid #ddd;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #carritoContainer h3 {
+            margin-top: 0;
+        }
+        #carritoContainer ul {
+            list-style: none;
+            padding: 0;
+        }
+        #carritoContainer ul li {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        #carritoContainer ul li img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        #carritoContainer ul li p {
+            margin: 0;
+            flex: 1;
+        }
+        #total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,6 +101,7 @@
             <a href="#productos" onclick="showSection('productos')">Productos</a>
             <a href="#ofertas" onclick="showSection('ofertas')">Ofertas</a>
             <a href="#contacto" onclick="showSection('contacto')">Contacto</a>
+            <a href="#carrito" onclick="showSection('carrito')">Carrito</a>
         </nav>
         <button class="btn-cerrar-sesion" onclick="toggleModal()">⚙</button>
     </header>
@@ -21,14 +109,60 @@
         <p>Inicio</p>
     </section>
     <section id="productos">
-        <p>Productos</p>
+        <h2>Productos</h2>
+        <div>
+            <input type="text" id="busqueda" placeholder="Buscar productos..." oninput="filtrarProductos()">
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" onchange="filtrarProductos()">
+                <option value="">Todas</option>
+                <option value="camisetas">Camisetas</option>
+                <option value="pantalones">Pantalones</option>
+                <option value="chaquetas">Chaquetas</option>
+                <option value="zapatos">Zapatos</option>
+                <option value="accesorios">Accesorios</option>
+                <option value="camisas">Camisas</option>
+                <option value="blusas">Blusas</option>
+                <option value="faldas">Faldas</option>
+                <option value="chaquetas_de_denim">Chaquetas de Denim</option>
+                <option value="abrigo">Abrigo</option>
+                <option value="chalecos">Chalecos</option>
+                <option value="trajes">Trajes</option>
+                <option value="pantalones_cortos">Pantalones Cortos</option>
+                <option value="leggings">Leggings</option>
+                <option value="bufandas">Bufandas</option>
+                <option value="guantes">Guantes</option>
+                <option value="sombreros">Sombreros</option>
+                <option value="gorros">Gorros</option>
+                <option value="cinturones">Cinturones</option>
+                <option value="calcetines">Calcetines</option>
+                <option value="ropa_de_deporte">Ropa de Deporte</option>
+                <option value="batas">Batas</option>
+                <option value="ropas_de_cama">Ropas de Cama</option>
+            </select>
+            <label for="precio">Precio máximo:</label>
+            <input type="number" id="precio" placeholder="Precio máximo" oninput="filtrarProductos()">
+        </div>
+        <div id="productosContainer"></div>
     </section>
+    
+    
+
     <section id="ofertas">
         <p>Ofertas</p>
     </section>
     <section id="contacto">
         <p>Contacto</p>
     </section>
+    <section id="carrito">
+        <h2>Carrito de Compras</h2>
+        <div id="carritoContainer">
+            <ul id="carritoList"></ul>
+            <p id="total">Total: $0.00</p>
+            <!-- Botón para vaciar el carrito -->
+            <button id="vaciarCarrito" onclick="vaciarCarrito()">Vaciar Carrito</button>
+        </div>
+    </section>
+    
 
     <!-- Ventana emergente para cerrar sesión -->
     <div id="modalCerrarSesion" class="modal">
@@ -45,7 +179,7 @@
             alert('Debes iniciar sesión para acceder a esta página.');
             window.location.href = './cliente_login.html'; // Redirigir a la página de login
         }
-
+    
         function showSection(sectionId) {
             const sections = document.querySelectorAll('section');
             sections.forEach(section => {
@@ -53,17 +187,132 @@
             });
             document.getElementById(sectionId).classList.add('active');
         }
-
+    
         function toggleModal() {
             const modal = document.getElementById('modalCerrarSesion');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
-
+    
         function cerrarSesion() {
             localStorage.removeItem('autenticado');
             alert('Has cerrado sesión');
             window.location.href = './cliente_login.html'; // Redirigir a la página de login
         }
+    
+        // Funciones para manejar los productos y el carrito
+        let productos = [];
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
+        function cargarProductos() {
+            fetch('./json/productos.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudo cargar el archivo JSON');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        productos = data.map(producto => ({
+                            ...producto,
+                            precio: parseFloat(producto.precio),
+                            cantidad: parseInt(producto.cantidad)
+                        }));
+                        mostrarProductos(); // Mostrar productos inicialmente
+                    } else {
+                        console.error('Formato de JSON incorrecto');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar productos:', error);
+                });
+        }
+    
+        function filtrarProductos() {
+            const busqueda = document.getElementById('busqueda').value.toLowerCase();
+            const categoria = document.getElementById('categoria').value;
+            const precioMaximo = parseFloat(document.getElementById('precio').value) || Infinity;
+    
+            const productosFiltrados = productos.filter(producto => {
+                const nombreCoincide = producto.nombre.toLowerCase().includes(busqueda);
+                const categoriaCoincide = categoria ? producto.categoria === categoria : true;
+                const precioCoincide = producto.precio <= precioMaximo;
+    
+                return nombreCoincide && categoriaCoincide && precioCoincide;
+            });
+    
+            mostrarProductos(productosFiltrados);
+        }
+    
+        function mostrarProductos(listaProductos = productos) {
+            const productosContainer = document.getElementById('productosContainer');
+            productosContainer.innerHTML = '';
+    
+            listaProductos.forEach((producto, index) => {
+                const productoDiv = document.createElement('div');
+                productoDiv.className = 'producto';
+                productoDiv.innerHTML = `
+                    <img src="./productos_img/${producto.imagen}" alt="${producto.nombre}">
+                    <div>
+                        <h3>${producto.nombre}</h3>
+                        <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+                        <p><strong>Precio:</strong> ${producto.precio} $</p>
+                        <p><strong>Cantidad Disponible:</strong> ${producto.cantidad}</p>
+                        <button onclick="agregarAlCarrito(${index})">Agregar al Carrito</button>
+                    </div>
+                `;
+                productosContainer.appendChild(productoDiv);
+            });
+        }
+    
+        function agregarAlCarrito(index) {
+            const producto = productos[index];
+            const productoEnCarrito = carrito.find(p => p.nombre === producto.nombre);
+    
+            if (productoEnCarrito) {
+                productoEnCarrito.cantidad += 1;
+            } else {
+                carrito.push({...producto, cantidad: 1});
+            }
+    
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            mostrarCarrito();
+        }
+    
+        function mostrarCarrito() {
+            const carritoList = document.getElementById('carritoList');
+            const totalElement = document.getElementById('total');
+            carritoList.innerHTML = '';
+    
+            let total = 0;
+    
+            carrito.forEach(item => {
+                const itemLi = document.createElement('li');
+                itemLi.innerHTML = `
+                    <img src="./productos_img/${item.imagen}" alt="${item.nombre}">
+                    <p>${item.nombre} - Cantidad: ${item.cantidad}</p>
+                    <p>$${(item.precio * item.cantidad).toFixed(2)}</p>
+                `;
+                carritoList.appendChild(itemLi);
+    
+                total += item.precio * item.cantidad;
+            });
+    
+            totalElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+    
+        function vaciarCarrito() {
+            carrito = []; // Vaciar el array del carrito
+            localStorage.setItem('carrito', JSON.stringify(carrito)); // Actualizar en localStorage
+            mostrarCarrito(); // Actualizar la vista del carrito
+        }
+    
+        // Mostrar carrito al cargar la página
+        mostrarCarrito();
+    
+        // Cargar productos al iniciar
+        cargarProductos();
     </script>
+    
 </body>
 </html>

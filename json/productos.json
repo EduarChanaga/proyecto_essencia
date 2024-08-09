@@ -1,58 +1,26 @@
 [
-    {
-      "nombre": "as",
-      "descripcion": "ad",
-      "precio": "1000000",
-      "categoria": "camisetas",
-      "imagen": "ropa.jpg",
-      "cantidad": "20"
-    },
-    {
-        "nombre": "camiseta",
-        "descripcion": "as",
-        "precio": "1000000",
-        "categoria": "camisetas",
-        "imagen": "ropas.jpeg",
-        "cantidad": "20"
-      },
-      {
-          "nombre": "camiseta",
-          "descripcion": "as",
-          "precio": "1000000",
-          "categoria": "camisetas",
-          "imagen": "ropa.jpg",
-          "cantidad": "20"
-        },
-        {
-            "nombre": "camiseta",
-            "descripcion": "as",
-            "precio": "1000000",
-            "categoria": "camisetas",
-            "imagen": "ropa.jpg",
-            "cantidad": "20"
-          },
-          {
-              "nombre": "camiseta",
-              "descripcion": "as",
-              "precio": "1000000",
-              "categoria": "camisetas",
-              "imagen": "ropas.jpeg",
-              "cantidad": "20"
-            },
-            {
-                "nombre": "camiseta",
-                "descripcion": "as",
-                "precio": "1000000",
-                "categoria": "camisetas",
-                "imagen": "ropa.jpg",
-                "cantidad": "20"
-              },
-              {
-                  "nombre": "camiseta",
-                  "descripcion": "as",
-                  "precio": "1000000",
-                  "categoria": "camisetas",
-                  "imagen": "ropa.jpg",
-                  "cantidad": "20"
-                }
-  ]
+  {
+    "nombre": "zapato",
+    "descripcion": "zapato.....",
+    "precio": "10000",
+    "categoria": "zapatos",
+    "imagen": "zapato.jpeg",
+    "cantidad": "10"
+  },
+  {
+    "nombre": "gorro de mimikui",
+    "descripcion": "este gorro esta patrocinado por santiago daza",
+    "precio": "800000",
+    "categoria": "gorros",
+    "imagen": "gorro.jpeg",
+    "cantidad": "2"
+  },
+  {
+    "nombre": "correa luis vuton",
+    "descripcion": "correa de luis vuton patrocinada por deivid correa de luis vuton patrocinada por deivid correa de luis vuton patrocinada por deivid correa de luis vuton patrocinada por",
+    "precio": "25000",
+    "categoria": "cinturones",
+    "imagen": "correa.jpeg",
+    "cantidad": "10"
+  }
+]

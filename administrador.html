@@ -18,7 +18,9 @@
             <input type="text" id="nombre" name="nombre" required>
             
             <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required></textarea>
+            <p id="caracteresRestantes">Caracteres restantes: 150</p>
+            <textarea  id="descripcion" name="descripcion" required maxlength="150"></textarea>
+            
             
             <label for="precio">Precio:</label>
             <input type="number" id="precio" name="precio" required>
@@ -50,7 +52,7 @@
                 <option value="ropas_de_cama">Ropas de Cama</option>
             </select>
             
-            <label for="nombreImagen">Nombre de la Imagen (sin extensión):</label>
+            <label for="nombreImagen">Nombre de la Imagen (imagen preferiblemente horizontal):</label>
             <input type="text" id="nombreImagen" name="nombreImagen" required>
             
             <label for="cantidad">Cantidad Disponible:</label>
@@ -262,6 +264,23 @@
         }
 
         cargarProductos();
+        document.addEventListener('DOMContentLoaded', () => {
+        const textarea = document.getElementById('descripcion');
+        const caracteresRestantes = document.getElementById('caracteresRestantes');
+        const maxLength = 150;
+
+        // Actualiza el conteo de caracteres restantes
+        function actualizarConteo() {
+            const restante = maxLength - textarea.value.length;
+            caracteresRestantes.textContent = `Caracteres restantes: ${restante}`;
+        }
+
+        // Configura el evento para cada cambio en el textarea
+        textarea.addEventListener('input', actualizarConteo);
+
+        // Inicializa el conteo al cargar la página
+        actualizarConteo();
+    });
     </script>
 </body>
 </html>
