@@ -6,91 +6,7 @@
     <title>Essencia</title>
     <link rel="stylesheet" href="./css/tienda.css">
     <style>
-        /* Estilos básicos para los productos y el carrito */
-        #productosContainer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .producto {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid #ddd;
-            padding: 10px;
-            width: 300px;
-            height: 400px; /* Ajusta la altura según el diseño */
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: #fff;
-            box-sizing: border-box; /* Incluye el padding en el tamaño total */
-            position: relative; /* Para usar el pseudo-elemento ::after */
-            overflow: hidden; /* Oculta cualquier contenido que se desborde */
-        }
-        .producto img {
-            max-width: 100%;
-            height: 150px; /* Ajusta la altura de la imagen según sea necesario */
-            object-fit: cover;
-            border-radius: 4px;
-            transition: transform 0.3s ease; /* Transición suave para el zoom */
-        }
-        .producto:hover img {
-            transform: scale(1.2); /* Aumenta el tamaño de la imagen en 20% */
-        }
-        .producto h3 {
-            margin: 10px 0;
-            font-size: 1.2em;
-        }
-        .producto p {
-            margin: 5px 0;
-            flex: 1; /* Permite que el contenido ocupe el espacio restante */
-        }
-        .producto button {
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .producto button:hover {
-            background-color: #e65c50;
-        }
-        #carritoContainer {
-            border: 1px solid #ddd;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        #carritoContainer h3 {
-            margin-top: 0;
-        }
-        #carritoContainer ul {
-            list-style: none;
-            padding: 0;
-        }
-        #carritoContainer ul li {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding: 10px 0;
-        }
-        #carritoContainer ul li img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-        #carritoContainer ul li p {
-            margin: 0;
-            flex: 1;
-        }
-        #total {
-            font-weight: bold;
-            margin-top: 10px;
-        }
+        
     </style>
 </head>
 <body>
@@ -109,7 +25,7 @@
         <p>Inicio</p>
     </section>
     <section id="productos">
-        <h2>Productos</h2>
+        <center>
         <div>
             <input type="text" id="busqueda" placeholder="Buscar productos..." oninput="filtrarProductos()">
             <label for="categoria">Categoría:</label>
@@ -142,6 +58,8 @@
             <label for="precio">Precio máximo:</label>
             <input type="number" id="precio" placeholder="Precio máximo" oninput="filtrarProductos()">
         </div>
+    </center>
+    <br>
         <div id="productosContainer"></div>
     </section>
     
@@ -151,8 +69,41 @@
         <p>Ofertas</p>
     </section>
     <section id="contacto">
-        <p>Contacto</p>
+        <h2>¡Contáctanos!</h2>
+        <p>Estamos aquí para ayudarte con cualquier consulta o comentario. No dudes en ponerte en contacto con nosotros a través de los siguientes medios:</p>
+        
+        <div class="info-container">
+            <div class="info-box direccion">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Dirección</h3>
+                <p>123 Calle Principal<br>Ciudad, País, 12345</p>
+            </div>
+            <div class="info-box telefono">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Teléfono</h3>
+                <p>(+123) 456-7890</p>
+            </div>
+            <div class="info-box email">
+                <i class="fas fa-envelope"></i>
+                <h3>Correo Electrónico</h3>
+                <p>contacto@ejemplo.com</p>
+            </div>
+        </div>
+        
+        <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
     </section>
+
     <section id="carrito">
         <h2>Carrito de Compras</h2>
         <div id="carritoContainer">
