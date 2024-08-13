@@ -11,16 +11,25 @@
 </head>
 <body>
     <header>
-        <div class="logo">Essencia</div>
-        <nav>
-            <a href="#inicio" onclick="showSection('inicio')">Inicio</a>
-            <a href="#productos" onclick="showSection('productos')">Productos</a>
-            <a href="#ofertas" onclick="showSection('ofertas')">Ofertas</a>
-            <a href="#contacto" onclick="showSection('contacto')">Contacto</a>
-            <a href="#carrito" onclick="showSection('carrito')">Carrito</a>
-        </nav>
+
+        <div class="container-1">
+            <h1 onmouseover="shinyLogo()" onmouseleave="normalLogo()" id="logo" class="logo">Essencia</h1>
+            
+        </div>
+    </header>
+    <header>  
+            <nav class="navigator">
+                <a href="#inicio"  onclick="showSection('inicio')"><p class="nav-items">Inicio</p></a>
+                <a href="#productos" onclick="showSection('productos')"><p class="nav-items">Productos</p></a>
+                <a href="#ofertas" onclick="showSection('ofertas')"><p class="nav-items">Ofertas</p></a>
+                <a href="#contacto" onclick="showSection('contacto')"><p class="nav-items">Contacto</p></a>
+                <a href="#carrito" onclick="showSection('carrito')"><p class="nav-items">Carrito</p></a>
+            </nav>
+
         <button class="btn-cerrar-sesion" onclick="toggleModal()">⚙</button>
     </header>
+
+   
     <section id="inicio" class="active">
         <p>Inicio</p>
     </section>
@@ -263,6 +272,20 @@
     
         // Cargar productos al iniciar
         cargarProductos();
+
+        function shinyLogo(){
+            let logo = document.getElementById("logo")
+            logo.classList.add("shiny")
+        };
+
+        function normalLogo(){
+            let logo = document.getElementById("logo")
+            logo.classList.remove("shiny")
+            logo.classList.add("ynihs")
+        };
+
+        let logo = document.getElementById("logo")
+
     </script>
     
 </body>

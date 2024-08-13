@@ -1,3 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Ms+Madi&display=swap');
+
+
+.logo{
+    color: #b95131;
+    background-color: #ffdcb4;
+    font-family: "Ms Madi";
+    font-size: 3em;
+    margin: 0;
+    margin-bottom: 0.5em;
+    margin-left: 0.15em;
+    padding: 0;
+    padding-top: 0.1em;
+    border-radius: 1vi;
+}
+
+.ynihs{
+    
+    background: linear-gradient(30deg, #ffdcb4,#ffdcb4 40%,#ffffff 50%,#ffdcb4,#ffdcb4);
+    animation: shine-go 0.5s ease-in-out reverse;
+}
+
+@keyframes shine-go{
+    0%{
+        background: linear-gradient(#ffdcb4);
+        background-position: 10em;
+    }
+    100%{
+        background-position: 0em;
+        background: linear-gradient(30deg, #ffdcb4,#ffdcb4 40%,#ffffff 50%,#ffdcb4,#ffdcb4);
+    }
+
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -11,8 +46,7 @@ body {
 .container {
     position: absolute;
     text-align: center;
-    opacity: 0;
-    animation: aparecer-logo 1s forwards, desaparecer-logo 1s forwards 2s, aparecer-opciones 1s forwards 3s;
+    opacity: 1;
 }
 
 .logo {
@@ -20,12 +54,11 @@ body {
     margin-left: 35%;
     position: absolute;
     opacity: 1;
-    animation: aparecer-logo 1s forwards, desaparecer-logo 1s forwards 2s;
 }
 
 .opciones {
     opacity: 0;
-    animation: aparecer-opciones 1s forwards 3s;
+    animation: aparecer-opciones 1s forwards 1s;
 }
 
 .logo img {
