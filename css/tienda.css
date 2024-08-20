@@ -313,7 +313,7 @@ section.active {
     padding: 15px;
     border-radius: 8px;
     color: white;
-    background-color: #ff6f00; /* Naranja intenso */
+    background-color: #f7b77c; /* Naranja intenso */
     text-align: center;
     position: relative;
 }
@@ -329,7 +329,7 @@ section.active {
 
 /* Caja para información de teléfono */
 .info-box.telefono {
-    background-color: #ff8c00; /* Naranja más claro */
+    background-color: #eb7d3e; /* Naranja más claro */
 }
 
 /* Estilo del formulario */
@@ -365,4 +365,16 @@ form button {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+}
+
+
+#vaciarCarrito{
+    background-color: #fac88a;
+    padding: 1vi;
+    font-weight: bold;
+    border-radius: 1vi;
+}
+
+#vaciarCarrito:hover{
+    background-color: #f8b35e;
 }
