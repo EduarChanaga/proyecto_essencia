@@ -142,35 +142,37 @@
         </form>
     </section>
 
-    <!-- Sección del Carrito -->
     <section id="carrito">
-        <h2>Carrito de Compras</h2>
+        <center><h2>Carrito de Compras</h2></center>
         <div id="carritoContainer">
             <ul id="carritoList"></ul>
-            <p id="total">Total: $0.00</p>
-            <button id="vaciarCarrito" onclick="vaciarCarrito()">Vaciar Carrito</button>
-            <button id="confirmarCompra" onclick="abrirFormularioPago()">Confirmar Compra</button>
-        </div>
-    </section>
-
-      <!-- Ventana emergente para formulario de pago -->
-        <div id="modalFormularioPago" class="modal">
-            <div class="modal-content">
-                <h3>Datos de Pago</h3>
-                <form id="formularioPago" onsubmit="procesarCompra(event)">
-                    <label for="nombreTarjeta">Nombre en la Tarjeta:</label>
-                    <input type="text" id="nombreTarjeta" required>
-                    <label for="numeroTarjeta">Número de la Tarjeta:</label>
-                    <input type="text" id="numeroTarjeta" required>
-                    <label for="expiracionTarjeta">Fecha de Expiración:</label>
-                    <input type="text" id="expiracionTarjeta" required>
-                    <label for="cvvTarjeta">CVV:</label>
-                    <input type="text" id="cvvTarjeta" required>
-                    <button type="submit">Realizar Pago</button>
-                </form>
-                <button onclick="cerrarFormularioPago()">Cancelar</button>
+            <div id="totalContainer">
+                <p id="total">Total: $0.00</p>
+                <button id="vaciarCarrito" onclick="vaciarCarrito()">Vaciar Carrito</button>
+                <button id="confirmarCompra" onclick="abrirFormularioPago()">Confirmar Compra</button>
             </div>
         </div>
+    </section>
+    
+    <!-- Ventana emergente para formulario de pago -->
+    <div id="modalFormularioPago" class="modal">
+        <div class="modal-content">
+            <h3>Datos de Pago</h3>
+            <form id="formularioPago" onsubmit="procesarCompra(event)">
+                <label for="nombreTarjeta">Nombre en la Tarjeta:</label>
+                <input type="text" id="nombreTarjeta" required>
+                <label for="numeroTarjeta">Número de la Tarjeta:</label>
+                <input type="text" id="numeroTarjeta" required>
+                <label for="expiracionTarjeta">Fecha de Expiración:</label>
+                <input type="text" id="expiracionTarjeta" required>
+                <label for="cvvTarjeta">CVV:</label>
+                <input type="text" id="cvvTarjeta" required>
+                <button type="submit">Realizar Pago</button>
+            </form>
+            <button onclick="cerrarFormularioPago()">Cancelar</button>
+        </div>
+    </div>
+    
 
     <!-- Ventana emergente para cerrar sesión -->
     <div id="modalCerrarSesion" class="modal">

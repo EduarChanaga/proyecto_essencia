@@ -1,127 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Ms+Madi&display=swap');
-
-
-.logo{
-    color: #b95131;
-    background-color: #ffdcb4;
-    font-family: "Ms Madi";
-    font-size: 3em;
-    margin: 0;
-    margin-bottom: 0.5em;
-    margin-left: 0.15em;
-    padding: 0;
-    padding-top: 0.1em;
-    border-radius: 1vi;
-}
-
-.ynihs{
-    
-    background: linear-gradient(30deg, #ffdcb4,#ffdcb4 40%,#ffffff 50%,#ffdcb4,#ffdcb4);
-    animation: shine-go 0.5s ease-in-out reverse;
-}
-
-@keyframes shine-go{
-    0%{
-        background: linear-gradient(#ffdcb4);
-        background-position: 10em;
-    }
-    100%{
-        background-position: 0em;
-        background: linear-gradient(30deg, #ffdcb4,#ffdcb4 40%,#ffffff 50%,#ffdcb4,#ffdcb4);
-    }
-
-}
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'B612', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-   background-color: white;
+    background: linear-gradient(135deg, #6A0DAD, #FFD700);
+    overflow: hidden;
 }
 
 .container {
-    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    opacity: 1;
-}
-
-.logo {
-    margin-top: -20%;
-    margin-left: 35%;
-    position: absolute;
-    opacity: 1;
-}
-
-.opciones {
-    opacity: 0;
-    animation: aparecer-opciones 1s forwards 1s;
-}
-
-.logo img {
- 
-    width: 18vi; /* Ajusta el tamaño de acuerdo a tu logo */
-    display: block;
-    margin: 0 auto 20px;
 }
 
 .opciones {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    gap: 50px;
+    opacity: 0;
+    animation: aparecer-opciones 1s forwards 1s;
+}
+
+.opcion {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    perspective: 1000px;
+}
+
+.icono {
+    font-size: 5em;
+    color: #fff;
+    margin-bottom: 20px;
+    transition: transform 0.5s, color 0.3s;
+}
+
+.opcion:hover .icono {
+    transform: rotateY(360deg);
+    color: #FFD700; /* Cambiar el color al girar */
 }
 
 button {
-    border-radius: 1vi;
-    width: 15vi;
-    height: 20vi;
-    padding: 1vi 2vi;
-    margin: 5vi;
-    font-size: 2vi;
     background-color: #f7b77c;
     color: #fff;
     border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 10px;
     cursor: pointer;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    transition: background-color 0.3s ease;
+    font-family: 'Impact', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
     background-color: #e9a15e;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes aparecer-logo {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes desaparecer-logo {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+button:active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes aparecer-opciones {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: scale(0.8);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
     }
 }

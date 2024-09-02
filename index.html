@@ -5,12 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selección de Usuario</title>
     <link rel="stylesheet" href="css/index.css">
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="opciones">
-            <button onclick="redirigir_cliente()">Cliente</button>
-            <button onclick="redirigir_administrador()">Administrador</button>
+            <div class="opcion">
+                <div class="icono">
+                    <i class="fas fa-user"></i> <!-- Icono de Cliente -->
+                </div>
+                <button onclick="redirigir_cliente()">Cliente</button>
+            </div>
+            <div class="opcion">
+                <div class="icono">
+                    <i class="fas fa-user-shield"></i> <!-- Icono de Administrador -->
+                </div>
+                <button onclick="redirigir_administrador()">Administrador</button>
+            </div>
         </div>
     </div>
     <audio id="inicio-sound" src="./efectos sonido/stars.mp3"></audio>
@@ -28,7 +40,5 @@
         var audio = document.getElementById("inicio-sound");
         audio.play();
     }
-   
-
 </script>
 </html>

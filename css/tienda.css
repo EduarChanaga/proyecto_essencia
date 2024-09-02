@@ -238,37 +238,140 @@ section.active {
 .producto button:hover {
     background-color: #e65c50;
 }
+/* Contenedor del carrito */
 #carritoContainer {
-    border: 1px solid #ddd;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeIn 0.8s ease-in-out;
 }
-#carritoContainer h3 {
-    margin-top: 0;
-}
-#carritoContainer ul {
+
+/* Estilos de la lista del carrito */
+#carritoList {
     list-style: none;
     padding: 0;
+    margin: 0 0 20px 0;
 }
-#carritoContainer ul li {
+
+#carritoList li {
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+    padding: 15px 0;
+    transition: background-color 0.3s ease;
 }
-#carritoContainer ul li img {
-    width: 50px;
-    height: 50px;
+
+#carritoList li:hover {
+    background-color: #f7f7f7;
+}
+
+/* Estilo de las imágenes del carrito */
+#carritoList li img {
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    margin-right: 10px;
+    margin-right: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-#carritoContainer ul li p {
+
+/* Estilo de la descripción del producto */
+#carritoList li p {
     margin: 0;
     flex: 1;
+    color: #333;
 }
+
+/* Contenedor del total y botones */
+#totalContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #total {
+    font-size: 1.5em;
     font-weight: bold;
-    margin-top: 10px;
+    color: #6A0DAD;
+}
+
+/* Estilo de los botones del carrito */
+#vaciarCarrito, #confirmarCompra {
+    background-color: #fac88a;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#vaciarCarrito:hover, #confirmarCompra:hover {
+    background-color: #f8b35e;
+}
+
+#vaciarCarrito:active, #confirmarCompra:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo del formulario de pago */
+#modalFormularioPago .modal-content {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#modalFormularioPago .modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#modalFormularioPago .modal-content button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#modalFormularioPago .modal-content button:hover {
+    background-color: #218838;
+}
+
+#modalFormularioPago .modal-content button:last-of-type {
+    background-color: #f8b35e;
+    color: #fff;
+}
+
+#modalFormularioPago .modal-content button:last-of-type:hover {
+    background-color: #fac88a;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
