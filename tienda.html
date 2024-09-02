@@ -28,44 +28,77 @@
         <button class="btn-cerrar-sesion" onclick="toggleModal()">⚙</button>
     </header>
 
-   
-    <section id="inicio" class="active">
-        <p>Inicio</p>
-    </section>
+    
+        <section id="inicio" class="active">
+            <div class="inicio-content">
+                <h2>Bienvenido a <span class="essencia-logo">Essencia</span></h2>
+                <p>Essencia es más que una tienda de ropa, es un reflejo de la singularidad y la esencia de cada persona.</p>
+        
+                <div class="empresa-info">
+                    <div class="info-box mission">
+                        <h3 class="info-title">Nuestra Misión</h3>
+                        <p>Nuestra misión es que nuestros clientes se sientan cómodos con nuestro tipo de ropa, que les ayude a recobrar su autoestima y que se sientan bien con las prendas que llevan puestas.</p>
+                    </div>
+                    <div class="info-box vision">
+                        <h3 class="info-title">Nuestra Visión</h3>
+                        <p>Crecer y expandirnos, ya sea a nivel nacional o mundial, mejorando nuestras prendas, corrigiendo los errores en nuestra plataforma, y manteniendo un diseño web atractivo y funcional.</p>
+                    </div>
+                </div>
+        
+                <div class="slogan">
+                    <p><strong>Viste con estilo, vive con esencia.</strong></p>
+                </div>
+        
+                <div class="colores">
+                    <h3>Colores de nuestra marca</h3>
+                    <ul>
+                        <li><span class="color-circle" style="background-color: #6A0DAD;"></span> Morado: Creatividad, sabiduría y dignidad.</li>
+                        <li><span class="color-circle" style="background-color: #FF8C00;"></span> Naranja: Alegría, determinación y entusiasmo.</li>
+                        <li><span class="color-circle" style="background-color: #FFD700;"></span> Amarillo: Energía, claridad y optimismo.</li>
+                        <li><span class="color-circle" style="background-color: #FF69B4;"></span> Rosado: Amabilidad, compasión y amor.</li>
+                        <li><span class="color-circle" style="background-color: #1E90FF;"></span> Azul: Calma, confianza y serenidad.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    
     <section id="productos">
         <center>
-        <div>
-            <input type="text" id="busqueda" placeholder="Buscar productos..." oninput="filtrarProductos()">
-            <label for="categoria">Categoría:</label>
-            <select id="categoria" onchange="filtrarProductos()">
-                <option value="">Todas</option>
-                <option value="camisetas">Camisetas</option>
-                <option value="pantalones">Pantalones</option>
-                <option value="chaquetas">Chaquetas</option>
-                <option value="zapatos">Zapatos</option>
-                <option value="accesorios">Accesorios</option>
-                <option value="camisas">Camisas</option>
-                <option value="blusas">Blusas</option>
-                <option value="faldas">Faldas</option>
-                <option value="chaquetas_de_denim">Chaquetas de Denim</option>
-                <option value="abrigo">Abrigo</option>
-                <option value="chalecos">Chalecos</option>
-                <option value="trajes">Trajes</option>
-                <option value="pantalones_cortos">Pantalones Cortos</option>
-                <option value="leggings">Leggings</option>
-                <option value="bufandas">Bufandas</option>
-                <option value="guantes">Guantes</option>
-                <option value="sombreros">Sombreros</option>
-                <option value="gorros">Gorros</option>
-                <option value="cinturones">Cinturones</option>
-                <option value="calcetines">Calcetines</option>
-                <option value="ropa_de_deporte">Ropa de Deporte</option>
-                <option value="batas">Batas</option>
-                <option value="ropas_de_cama">Ropas de Cama</option>
-            </select>
-            <label for="precio">Precio máximo:</label>
-            <input type="number" id="precio" placeholder="Precio máximo" oninput="filtrarProductos()">
-        </div>
+            <div class="filtros-container">
+                <input type="text" id="busqueda" class="filtro-input" placeholder="Buscar productos..." oninput="filtrarProductos()">
+                
+                <label for="categoria" class="filtro-label">Categoría:</label>
+                <select id="categoria" class="filtro-select" onchange="filtrarProductos()">
+                    <option value="">Todas</option>
+                    <option value="camisetas">Camisetas</option>
+                    <option value="pantalones">Pantalones</option>
+                    <option value="chaquetas">Chaquetas</option>
+                    <option value="zapatos">Zapatos</option>
+                    <option value="accesorios">Accesorios</option>
+                    <option value="camisas">Camisas</option>
+                    <option value="blusas">Blusas</option>
+                    <option value="faldas">Faldas</option>
+                    <option value="chaquetas_de_denim">Chaquetas de Denim</option>
+                    <option value="abrigo">Abrigo</option>
+                    <option value="chalecos">Chalecos</option>
+                    <option value="trajes">Trajes</option>
+                    <option value="pantalones_cortos">Pantalones Cortos</option>
+                    <option value="leggings">Leggings</option>
+                    <option value="bufandas">Bufandas</option>
+                    <option value="guantes">Guantes</option>
+                    <option value="sombreros">Sombreros</option>
+                    <option value="gorros">Gorros</option>
+                    <option value="cinturones">Cinturones</option>
+                    <option value="calcetines">Calcetines</option>
+                    <option value="ropa_de_deporte">Ropa de Deporte</option>
+                    <option value="batas">Batas</option>
+                    <option value="ropas_de_cama">Ropas de Cama</option>
+                </select>
+            
+                <label for="precio" class="filtro-label">Precio máximo:</label>
+                <input type="number" id="precio" class="filtro-input" placeholder="Precio máximo" oninput="filtrarProductos()">
+            </div>
+            
     </center>
     <br>
         <div id="productosContainer"></div>
@@ -109,16 +142,35 @@
         </form>
     </section>
 
+    <!-- Sección del Carrito -->
     <section id="carrito">
         <h2>Carrito de Compras</h2>
         <div id="carritoContainer">
             <ul id="carritoList"></ul>
             <p id="total">Total: $0.00</p>
-            <!-- Botón para vaciar el carrito -->
             <button id="vaciarCarrito" onclick="vaciarCarrito()">Vaciar Carrito</button>
+            <button id="confirmarCompra" onclick="abrirFormularioPago()">Confirmar Compra</button>
         </div>
     </section>
-    
+
+      <!-- Ventana emergente para formulario de pago -->
+        <div id="modalFormularioPago" class="modal">
+            <div class="modal-content">
+                <h3>Datos de Pago</h3>
+                <form id="formularioPago" onsubmit="procesarCompra(event)">
+                    <label for="nombreTarjeta">Nombre en la Tarjeta:</label>
+                    <input type="text" id="nombreTarjeta" required>
+                    <label for="numeroTarjeta">Número de la Tarjeta:</label>
+                    <input type="text" id="numeroTarjeta" required>
+                    <label for="expiracionTarjeta">Fecha de Expiración:</label>
+                    <input type="text" id="expiracionTarjeta" required>
+                    <label for="cvvTarjeta">CVV:</label>
+                    <input type="text" id="cvvTarjeta" required>
+                    <button type="submit">Realizar Pago</button>
+                </form>
+                <button onclick="cerrarFormularioPago()">Cancelar</button>
+            </div>
+        </div>
 
     <!-- Ventana emergente para cerrar sesión -->
     <div id="modalCerrarSesion" class="modal">

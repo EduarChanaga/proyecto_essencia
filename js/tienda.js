@@ -72,7 +72,10 @@ function mostrarProductos(listaProductos = productos) {
     const productosContainer = document.getElementById('productosContainer');
     productosContainer.innerHTML = '';
 
-    listaProductos.forEach((producto, index) => {
+    // Filtrar productos para que solo se muestren los que tienen cantidad mayor a 0
+    const productosVisibles = listaProductos.filter(producto => producto.cantidad > 0);
+
+    productosVisibles.forEach((producto, index) => {
         const productoDiv = document.createElement('div');
         productoDiv.className = 'producto';
         productoDiv.innerHTML = `
@@ -149,3 +152,52 @@ function normalLogo(){
 };
 
 let logo = document.getElementById("logo")
+
+
+// Funciones para abrir y cerrar el formulario de pago
+function abrirFormularioPago() {
+    document.getElementById('modalFormularioPago').style.display = 'block';
+}
+
+function cerrarFormularioPago() {
+    document.getElementById('modalFormularioPago').style.display = 'none';
+}
+
+function procesarCompra(event) {
+    event.preventDefault();
+
+    // Reducir las cantidades de los productos en el carrito
+    carrito.forEach(item => {
+        const productoOriginal = productos.find(p => p.nombre === item.nombre);
+        if (productoOriginal) {
+            productoOriginal.cantidad -= item.cantidad;
+        }
+    });
+
+    // Filtrar productos con cantidad mayor a 0 para la descarga
+    const productosActualizados = productos.filter(producto => producto.cantidad > 0);
+
+    // Vaciar el carrito
+    carrito = [];
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    mostrarCarrito();
+
+    // Descargar el JSON actualizado sin productos con cantidad 0
+    descargarJSON(productosActualizados, 'productos_actualizados.json');
+
+    // Cerrar el formulario de pago
+    cerrarFormularioPago();
+
+    alert('Compra realizada con éxito!');
+}
+
+// Función para descargar un archivo JSON
+function descargarJSON(objeto, nombreArchivo) {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(objeto));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", nombreArchivo);
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
